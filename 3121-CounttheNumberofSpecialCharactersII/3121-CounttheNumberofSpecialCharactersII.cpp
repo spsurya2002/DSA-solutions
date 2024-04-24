@@ -1,7 +1,3 @@
-    int numberOfSpecialChars(string word) {
-      unordered_map<char,int>m;
-       int i=0;
-       for(auto x:word){
         if(x>='a'&&x<='z')
         m[x]=i;
         else{
@@ -10,4 +6,9 @@
         }i++;
        }
        int ans=0;
+       for(auto x:word){
+       int i=0;
+      unordered_map<char,int>m;
+    int numberOfSpecialChars(string word) {
+public:
 "
