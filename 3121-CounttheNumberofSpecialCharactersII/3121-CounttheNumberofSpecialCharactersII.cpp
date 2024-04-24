@@ -1,14 +1,16 @@
-       map<char,deque<int>>m;
-       int i=0;
-       for(auto x:word){
-        m[x].push_back(i);
-        i++;
+        if(x>='a'&&x<='z')
+        m[x]=i;
+        else{
+            if(m[x]==0)m[x]=i;
+        }i++;
        }
        int ans=0;
        for(auto x:m){
+       char c=x.first+32;
+       cout<<x.first<<" "<<x.second<<endl;
         if(m.find(c)!=m.end()){
-            if(m[c].back()<x.second.front())ans++;
-public:
-    int numberOfSpecialChars(string word) {
-        char c=x.first+32;
+            if(m[c]<x.second)ans++;
+        }
+       for(auto x:word){
+       int i=0;
 "
