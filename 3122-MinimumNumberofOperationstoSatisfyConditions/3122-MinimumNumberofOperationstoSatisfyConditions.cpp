@@ -1,8 +1,11 @@
-            dp[m-1][i]=freq[m-1][i];
+        return ans;
+   }
+    int minimumOperations(vector<vector<int>>& grid) {
+        int ans = INT_MAX;
+        int m=grid.size(),n=grid[0].size();
         }
-        for(int j=m-2;j>=0;j--){
-            for(int i=0;i<10;i++){
-                int mi=INT_MAX;
-                for(int k=0;k<10;k++){
-                    if(i!=k)mi=min(mi,dp[j+1][k]);
+            ans=min(ans,dp[0][i]);
+        for(int i=0;i<10;i++){
+        int ans=INT_MAX;
+        }
 [
