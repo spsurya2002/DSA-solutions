@@ -7,4 +7,5 @@ public:
             if(prices[i+1]-prices[i]>=0)ans+=(prices[i+1]-prices[i]);
         }return ans;
     }
+};
 [
