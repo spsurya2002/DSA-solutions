@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxSatisfaction(vector<int>& satisfaction) {
-        unsigint n=satisfaction.size();
+        unsigned int n=satisfaction.size();
         sort(satisfaction.begin(),satisfaction.end());
         int ans=0;
         for(int i=0;i<n;i++){
