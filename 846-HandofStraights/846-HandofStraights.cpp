@@ -9,5 +9,9 @@
                     m[y]--;if(m[y]==0){m.erase(y);}
                  }else return false;
                 y=y+1;
+        if(hand.size()%groupSize!=0)return false;
+        if(groupSize==1)return true;
             }
+        }
+        return true;
 [
