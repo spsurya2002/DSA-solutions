@@ -4,12 +4,13 @@
             if(s[i]=='a'||s[i]=='e'||s[i]=='i'||s[i]=='o'||s[i]=='u')
             c++;
         }
-        return c!=0;
+        return true;
 
     }
-};
 public:
 class Solution {
+        if(c==0)return false;
+};
 "leetcoder"
 "bbcd"
 "ifld"
