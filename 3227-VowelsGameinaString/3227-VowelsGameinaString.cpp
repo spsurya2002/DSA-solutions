@@ -1,15 +1,18 @@
     bool doesAliceWin(string s) {
-        vector<int>v;
-        string vowel = "aeiou";
+        int c=0;
         for(int i=0;i<s.length();i++){
-            if(vowel.find(s[i])!=string::npos)
-            v.push_back(i);
+            if(s[i]=='a'||s[i]=='e'||s[i]=='i'||s[i]=='o'||s[i]=='u')
+            c++;
+        }
+        return c!=0;
+
+    }
+};
+public:
+class Solution {
 "leetcoder"
 "bbcd"
 "ifld"
-1 2 5 7 
-
-0 
 true
 false
 true
