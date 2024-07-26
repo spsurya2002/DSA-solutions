@@ -5,19 +5,14 @@ public:
         for(auto x:s)m[x]++;
         int ans=0;
         for(auto x:m){
-            if(x.second>2&&x.second%2==0)ans+=2;
-            else if(x.second>2)ans+=1;
-            else ans+=x.second;
+            ans++;
         }
         return ans;
+    }
+            if(!(x.second%2))ans++;
+};
 "abaacbcbb"
 "aa"
-c 2
-b 4
-a 3
-
-a 2
-
 5
 2
 5
