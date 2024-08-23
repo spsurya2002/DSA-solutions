@@ -1,4 +1,10 @@
-            ListNode* newNode=new ListNode(dig);
+            l2=l2->next;
+            }
+        }else{
+            while(l1!=nullptr){
+            int x=l1->val;
+            int val=x+carry;
+            int dig=val%10;
 [2,4,3]
 [5,6,4]
 [0]
