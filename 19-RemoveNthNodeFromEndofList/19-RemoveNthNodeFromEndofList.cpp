@@ -2,6 +2,10 @@
         }
 
         if(n==c)return head->next;
+
+        n=c-n;
+     
+        temp=head;
 [1,2,3,4,5]
 2
 [1]
