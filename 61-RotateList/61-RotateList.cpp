@@ -1,22 +1,22 @@
-            ft=ft->next;
-        }
-        ListNode* sh = ft->next;
-        ListNode* st=sh;
-        
-        c=0;
-        while(c<l-k-1){
-            c++;
-            st=st->next;
-        }
-        st->next=fh;
-        ft->next=nullptr;
-        return sh;
-            c++;
-        while(c<k-1){
-        int c=0;
-
-        ListNode* ft = fh;
-        ListNode* fh = head;
+        if(k==0)return head;
+        if(head==nullptr||head->next==nullptr)return head;
+    ListNode* rotateRight(ListNode* head, int k) {
+    }
+        }return l;
+            head=head->next;
+            l++;
+        while(head){
+        int l=0;
+public:
+    int len(ListNode* head){
+class Solution {
+ */
+ * };
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode *next;
+ *     int val;
 [1,2,3,4,5]
 2
 [0,1,2]
