@@ -1,11 +1,11 @@
-            myres.push_back(temp);
+            }
         }
-
-        return myres;
-    }
-
-    vector<vector<string>> partition(string s) {
-        vector<deque<string>> ds = find(s);
+        
+        vector<vector<string>> result;
+            for (int j = i; j < n; ++j) {
+                if (s[i] == s[j] && (j - i <= 2 || dp[i + 1][j - 1])) {
+                    dp[i][j] = true;
+                }
 "aab"
 "a"
 [["a","a","b"],["aa","b"]]
