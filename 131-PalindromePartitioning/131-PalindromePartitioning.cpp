@@ -1,11 +1,11 @@
+            if (isPalindrome(s, index, i)) {
+                path.push_back(s.substr(index, i - index + 1)); // Add current 
+                partitionHelper(i + 1, s, path, res); // Recur for the remaining part
+                path.pop_back(); // Backtrack and remove the last added substring
             }
         }
-        
-        vector<vector<string>> result;
-            for (int j = i; j < n; ++j) {
-                if (s[i] == s[j] && (j - i <= 2 || dp[i + 1][j - 1])) {
-                    dp[i][j] = true;
-                }
+    }
+substring
 "aab"
 "a"
 [["a","a","b"],["aa","b"]]
