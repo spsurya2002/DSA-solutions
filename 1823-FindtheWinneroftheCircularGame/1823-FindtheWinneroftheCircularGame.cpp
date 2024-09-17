@@ -1,16 +1,12 @@
-        int pos=(i+k)%v.size();
-        v.erase(v.begin()+pos);
-        josh(pos,v,k);
+class Solution {
+public:
+    int josephus(int n, int k) {
+        if (n == 1)
+            return 0; // base case: the last person is the winner (index 0)
+        return (josephus(n - 1, k) + k) % n;
     }
     int findTheWinner(int n, int k) {
-        vector<int>v;
-        int i=1;
-        for(int i=1;i<=n;i++){
-            v.push_back(i);
-        }
-        k--;
-        josh(0,v,k);
-        return ans;
+         return josephus(n, k) + 1;
     }
 };
 5
