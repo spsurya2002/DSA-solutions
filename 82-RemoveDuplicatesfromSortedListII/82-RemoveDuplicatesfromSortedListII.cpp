@@ -1,25 +1,26 @@
-                while (current->next && current->val == current->next->val) {
-                    current = current->next;
-                }
-                // Link prev to the node after the duplicates
-                prev->next = current->next;
-            } else {
-                // Skip all duplicates
-            if (current->next && current->val == current->next->val) {
-        while (current) {
-            // If current has a duplicate, skip all nodes with the same value
         
+        while (current) {
+            if (current->next && current->val == current->next->val) {
         ListNode* current = head;
-        ListNode* prev = dummy;  // Points to the last node before the duplicate sequence
+        ListNode* prev = dummy;  
         ListNode* dummy = new ListNode(0, head);
-        // Create a dummy node to handle edge cases (like head being part of duplicates)
     ListNode* deleteDuplicates(ListNode* head) {
 public:
 class Solution {
+            }
+            current = current->next;
+                while (current->next && current->val == current->next->val) {
+                    current = current->next;
+                }
+                prev->next = current->next;
+            } else {
+                prev = prev->next;
+        }
+        
 [1,2,3,3,4,4,5]
 [1,1,1,2,3]
-[1,2,5]
-[2,3]
+[0,1,2,3,3,4,4,5]
+[0,1,1,1,2,3]
 [1,2,5]
 [2,3]
 [
