@@ -1,175 +1,96 @@
-// points Initialize the map
-function draw
-const map = L.mapArrow(source('map').setView([0,, destination 0], , color2);
-L.tileLayer('https)://{s}.tile.openstreet {
-    constmap.org arrow =/{z L.p}/{xolyline}/{y([source}.png, destination',], {
-    attribution {
-        color: ': color© Open, //StreetMap Use the contributors provided color'
-}).add
-       To(map weight:);
+// Initialize the map
+const map = L.map('map').setView([0, 0], 2);
 
-// 2 Function to,
-        draw a opacity: 0 straight arrow. between two7 points,
-        className
-function drawArrow(source: ', destinationarrow-flow, color arrow-f)ade arrow {
-    const-trail arrow ='
-    L }).add.pTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
 
-    // Addolyline arrowhead([source, destination], {
-        color
-   : color if (, // Use theL.p provided colorolylineDecorator
-       ) weight: {
-        const 2 arrowHead,
-        = L opacity:.poly 0lineDecor.ator(arrow,7,
-        className {
-           : ' patterns:arrow-flow [
-                arrow-f { offsetade: ' arrow100%-trail'
-   ', repeat }).add: 0, symbol:To(map);
+// Function to draw a straight arrow between two points
+function drawArrow(source, destination, color) {
+    const arrow = L.polyline([source, destination], {
+        color: color, // Use the provided color
+        weight: 2,
+        opacity: 0.7,
+        className: 'arrow-flow arrow-fade arrow-trail'
+    }).addTo(map);
 
-    // Add L.Symbol. arrowhead
-   arrowHead if (L.polyline({ pixelSize: 10, polygonDecorator): false {
-        const, path arrowHeadOptions: = L { color.poly: colorlineDecor } })ator( }
-           arrow, ]
-        }).add {
-            patterns:To(map [
-               );
-    { offset } else: ' {
-       100% console.w', repeatarn(":L.p 0,olyline symbol:Decorator L.S is notymbol. available.arrowHead Arrows({ pixel will beSize: drawn without 10 arrowheads, polygon.");
+    // Add arrowhead
+    if (L.polylineDecorator) {
+        const arrowHead = L.polylineDecorator(arrow, {
+            patterns: [
+                { offset: '100%', repeat: 0, symbol: L.Symbol.arrowHead({ pixelSize: 10, polygon: false, pathOptions: { color: color } }) }
+            ]
+        }).addTo(map);
+    } else {
+        console.warn("L.polylineDecorator is not available. Arrows will be drawn without arrowheads.");
     }
 
-   : false, path // TriggerOptions: fade-in { effect color: color
-    setTimeout } })(() => }
-            {
-        ]
-        const arrow }).addElement =To(map);
-    arrow.getElement();
-        } else if ( {
-       arrowElement console.w)arn(" {
-            arrowL.pElement.classListolyline.add('Decoratorvisible is');
- not        available. }
-    }, Arrows 100 will be);
-
-    drawn without // Trigger arrowheads trail effect.");
-   
-    const arrow }
-
-    // TriggerElement = fade-in arrow.getElement effect();
-   
-    setTimeout if ((() =>arrowElement {
-       ) const arrow {
-        arrowElement =Element.style arrow.getElement.stroke();
-       Dasharray if ( = 'arrowElement)1000 {
-            arrow';
-        arrowElementElement.classList.add('visible');
+    // Trigger fade-in effect
+    setTimeout(() => {
+        const arrowElement = arrow.getElement();
+        if (arrowElement) {
+            arrowElement.classList.add('visible');
         }
-    },.style.strokeDashoffset 100 = '1000';
-        arrow);
+    }, 100);
 
-   Element. // Triggeranimate trail effect([
-            {
-    strokeDash const arrowoffset:Element = 100 arrow.getElement0 },
-            { strokeDash();
+    // Trigger trail effect
+    const arrowElement = arrow.getElement();
     if (arrowElement) {
-        arrowElement.style.strokeDasharray =offset '100: 0 }
-0       ';
- ], {
-                   duration: arrow Element.style2000,
-.strokeDashoffset = '1000            easing: 'linear';
-        arrow'
+        arrowElement.style.strokeDasharray = '1000';
+        arrowElement.style.strokeDashoffset = '1000';
+        arrowElement.animate([
+            { strokeDashoffset: 1000 },
+            { strokeDashoffset: 0 }
+        ], {
+            duration: 2000,
+            easing: 'linear'
         });
     }
-Element.}
+}
 
-// Fetch IP data from the Flask backendanimate
-async([
-            function fetch { strokeDashIPDataoffset:() 100 {
-    const0 response = },
-            { await fetch strokeDash('/getoffset:_ip_data 0');
-    }
-        const data ], = await {
-            duration response.json: ();
-   2000 return data,
-;
-            easing:}
+// Fetch IP data from the Flask backend
+async function fetchIPData() {
+    const response = await fetch('/get_ip_data');
+    const data = await response.json();
+    return data;
+}
 
-// Update 'linear the map'
-        with new });
-    IP data }
+// Update the map with new IP data
+async function updateMap() {
+    const ipPairs = await fetchIPData();
 
-async}
+    // Clear previous markers and arrows
+    map.eachLayer(layer => {
+        if (layer instanceof L.Marker || layer instanceof L.Polyline) {
+            map.removeLayer(layer);
+        }
+    });
 
-// Fetch IP data function updateMap() from the {
-    Flask backend const ip
-asyncPairs = function fetchIPData await fetchIPData() {
-    const();
+    // Define colors for each pair
+    const colors = ['red', 'blue', 'green', 'purple']; // 4 colors for 4 pairs
 
-    // Clear response = previous markers await fetch and arrows('/get
-   _ip_data map.each');
-   Layer(l const dataayer => = await {
-        response.json if (();
-   layer instanceof return data L.M;
-arker ||}
-
-// layer instanceof Update the map L.P with newolyline IP data)
-async {
-            map function update.removeLayerMap()(layer {
-   );
-        const ip }
-   Pairs = });
-
-    await fetch // DefineIPData colors for();
-
-    each pair // Clear
-    previous markers const colors and arrows = ['red',
-    map.each 'blueLayer(l', 'ayer =>green', {
-        'pur if (ple']; // layer instanceof L.M4 colorsarker || for  layer instanceof4 pairs L.P
-
-oly   line // Add) markers and {
-            map arrows for.removeLayer each pair
-   (layer);
-        ipPairs }
-   .forEach(( });
-
-   pair, // Define index) => colors for each pair {
-        const
-    source = [pair const colors = ['.source.lred',at, 'blue pair.source', '.longreen',];
-        'pur const destinationple']; = [ // pair.d4 colorsestination.l for at,4 pairs pair.d
-
-   estination.l // Addon];
-        const markers and arrows for color = each pair
+    // Add markers and arrows for each pair
     ipPairs.forEach((pair, index) => {
         const source = [pair.source.lat, pair.source.lon];
-        colors[index % colors.length];
+        const destination = [pair.destination.lat, pair.destination.lon];
+        const color = colors[index % colors.length];
 
         // Add markers for source and destination
         L.marker(source, {
-            className: 'marker-pulse marker- const destinationrotate' // Add = rotating effect
-        [ }).pairaddTo(map)..dbindPopup(`Source:estination.lat, pair.destination.lon];
-        ${pair const color = colors[index % colors.source.city.length}, ${];
+            className: 'marker-pulse marker-rotate' // Add rotating effect
+        }).addTo(map).bindPopup(`Source: ${pair.source.city}, ${pair.source.state}, ${pair.source.country}`);
 
-        //pair.source Add markers.state}, for source ${pair.source.count and destination
-       ry}` L.m);
-
-       arker(source L.marker(d,estination, {
-            className {
-           : 'marker className:-pulse 'mark marker-er-protate'ulse marker // Add-rotate rotating effect' //
-        Add rotating }).add effectTo(map
-        }).addTo).bindPopup(`(map).Source:bindPopup ${pair(`Destination.source.city: ${}, ${pair.dpair.sourceestination.city.state},}, ${ ${pairpair.d.source.countestination.statery}`}, ${);
-
-       pair.d L.mestination.countarker(dry}`estination,);
-
-        {
-            // Draw className: a straight 'mark arrow betweener-p source andulse marker destination-rotate
-        draw' //Arrow(source Add rotating, destination effect, color
-        }).);
-   addTo });
-(map).}
-
-// UpdatebindPopup the map(`Destination every : ${pair.d2 seconds
-setestination.cityInterval(}, ${updateMappair.d, estination.state2000}, ${);
-
-//pair.d Initial mapestination.country}`);
+        L.marker(destination, {
+            className: 'marker-pulse marker-rotate' // Add rotating effect
+        }).addTo(map).bindPopup(`Destination: ${pair.destination.city}, ${pair.destination.state}, ${pair.destination.country}`);
 
         // Draw a straight arrow between source and destination
-        drawArrow(source, destination, color update
+        drawArrow(source, destination, color);
+    });
+}
+
+// Update the map every 2 seconds
+setInterval(updateMap, 2000);
+
+// Initial map update
 updateMap();
