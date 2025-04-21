@@ -96,3 +96,113 @@ A phishing email might:
 - **Python Libraries**: `email`, `unicodedata`, `langdetect`.
 
 Would you like a sample script to analyze these in an email?
+
+
+
+
+
+
+
+
+...
+
+
+
+
+
+
+# Spam Score Algorithm Design
+
+Based on your requirements, I'll design a weighted scoring algorithm that combines both rule-based and AI-based factors to produce a spam score between 0-100.
+
+## Scoring Framework
+
+### Rule-Based Factors (Total Weight: 60%)
+1. **Sender Domain Age** (10%)
+   - New domains (<30 days): 90-100 points
+   - Young domains (30-180 days): 60-89 points
+   - Established domains (>180 days): 0-59 points
+
+2. **Email Authentication Failures** (20%)
+   - SPF failure: +25 points
+   - DKIM failure: +25 points
+   - DMARC failure: +25 points
+   - All pass: 0 points
+
+3. **Domain Reputation** (10%)
+   - Blacklisted: 100 points
+   - Neutral: 50 points
+   - Whitelisted: 0 points
+
+4. **Link Analysis** (20%)
+   - Link count (per link over 3): +10 points each
+   - URL shortener present: +30 points
+   - Suspicious domains in links: +20 points per domain
+
+### AI-Based Factors (Total Weight: 40%)
+1. **Sentiment Analysis** (10%)
+   - Overly positive/negative sentiment: +20-50 points
+
+2. **Grammar Mistakes** (10%)
+   - Excessive errors (>5% of words): +30 points
+   - Moderate errors (2-5%): +15 points
+   - Few errors (<2%): +5 points
+
+3. **Suspicious Indicators** (10%)
+   - Urgency indicators: +10 points each
+   - Request for personal info: +20 points
+   - Unusual requests: +15 points each
+
+4. **Stylometry** (5%)
+   - Doesn't match claimed sender's writing style: +25 points
+
+5. **Zero-Day Attack Patterns** (5%)
+   - Matches new attack patterns: +50 points
+
+## Calculation Algorithm
+
+```
+def calculate_spam_score(email):
+    # Initialize score
+    score = 0
+    
+    # Rule-based calculations
+    score += domain_age_score(email.domain_age) * 0.10
+    score += auth_failure_score(email.spf, email.dkim, email.dmarc) * 0.20
+    score += reputation_score(email.reputation) * 0.10
+    score += link_analysis_score(email.links) * 0.20
+    
+    # AI-based calculations
+    score += sentiment_score(email.content) * 0.10
+    score += grammar_score(email.content) * 0.10
+    score += suspicious_indicators_score(email.content) * 0.10
+    score += stylometry_score(email.content, email.claimed_sender) * 0.05
+    score += zero_day_score(email.content) * 0.05
+    
+    # Ensure score is within 0-100 range
+    return min(100, max(0, round(score)))
+
+# Example helper function
+def auth_failure_score(spf, dkim, dmarc):
+    score = 0
+    if not spf: score += 25
+    if not dkim: score += 25
+    if not dmarc: score += 25
+    return score
+```
+
+## Threshold Recommendations
+
+- **0-30**: Likely legitimate
+- **31-60**: Suspicious, review needed
+- **61-80**: Probably spam
+- **81-100**: Almost certainly spam
+
+## Enhancement Suggestions
+
+1. Consider adding dynamic weights based on your observed false positive/negative rates
+2. Implement a feedback loop to adjust weights over time
+3. Add temporal factors (time of day, frequency of similar messages)
+4. Include recipient-specific factors (was the message expected?)
+
+Would you like me to elaborate on any particular aspect of this algorithm design?
